@@ -19,7 +19,6 @@ public class ExaminerServiceImpl implements ExaminerService {
     @Override
     public Collection<Question> getQuestions(int amount) throws LackOfQuestionsException {
         if (amount < 1) throw new WrongQuestionsAmountException();
-
         Set<Question> questionList = new HashSet<>();
         if (questionService.getSize() >= amount) {
             while (questionList.size() < amount) {
