@@ -30,7 +30,6 @@ public class ExaminerServiceTest {
     public void beforeEach() {
         Question question = new Question("Что такое арбуз?", "Фрукт");
         when(questionService.getRandomQuestion()).thenReturn(question);
-//        when(questionService.getSize()).thenReturn(5);
     }
 
     @Test
