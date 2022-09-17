@@ -2,8 +2,9 @@ package ru.spb.curs2.service;
 
 import org.springframework.stereotype.Service;
 import ru.spb.curs2.questionary.Question;
+
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
@@ -23,9 +24,7 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question addQuestion(String question, String answer) {
-        Question addingQuestion = new Question(question,answer);
-        this.questions.add(addingQuestion);
-        return addingQuestion;
+        return addQuestion(new Question(question, answer));
     }
 
     @Override
@@ -42,18 +41,7 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question getRandomQuestion() {
-        int randomNumber = random.nextInt(this.questions.size());
-        int currentIndex = 0;
-        Iterator<? extends Question> iterator = this.questions.iterator();
-        Question randomQuestion = null;
-
-        while(iterator.hasNext()){
-            randomQuestion = iterator.next();
-            if(currentIndex == randomNumber)
-                return randomQuestion;
-            currentIndex++;
-        }
-        return randomQuestion;
+        return new ArrayList<>(questions).get(random.nextInt(questions.size()));
     }
 
     public int getSize() {

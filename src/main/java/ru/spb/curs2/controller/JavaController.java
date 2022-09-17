@@ -1,17 +1,14 @@
 package ru.spb.curs2.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.spb.curs2.exception.LackOfQuestionsException;
-import ru.spb.curs2.exception.QuestionAlreadyAddedException;
-import ru.spb.curs2.exception.QuestionNotFoundException;
 import ru.spb.curs2.questionary.Question;
 import ru.spb.curs2.service.QuestionService;
 
 @Controller
-@RequestMapping(path = "/exam")
+@RequestMapping(path = "${url-start}")
 public class JavaController {
     private final QuestionService questionService;
 

@@ -7,12 +7,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ru.spb.curs2.exception.LackOfQuestionsException;
 import ru.spb.curs2.questionary.Question;
 import ru.spb.curs2.service.ExaminerServiceImpl;
 import ru.spb.curs2.service.JavaQuestionService;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 
 import static org.mockito.Mockito.when;
 
@@ -25,17 +25,21 @@ public class ExaminerServiceTest {
     @InjectMocks
     private ExaminerServiceImpl examinerService;
 
-
     @BeforeEach
-    public void beforeEach() {
-        Question question = new Question("Что такое арбуз?", "Фрукт");
-        when(questionService.getRandomQuestion()).thenReturn(question);
+    public void before() {
+        when(questionService.getSize()).thenReturn(5);
     }
 
     @Test
     public void getQuestionsTest() {
-        Set<Question> questionList = new HashSet<>();
-        questionList.add(questionService.getRandomQuestion());
+        when(questionService.getRandomQuestion()).thenReturn(new Question("Что такое арбуз?", "Фрукт"));
+        Collection<Question> questionList = examinerService.getQuestions(1);
         Assertions.assertEquals(questionList.size(), 1);
+    }
+
+    @Test
+    public void negativeGetQuestionTest() {
+        org.assertj.core.api.Assertions.assertThatExceptionOfType(LackOfQuestionsException.class)                    //не работают assertions, я запарился...
+                .isThrownBy(() -> examinerService.getQuestions(7));
     }
 }

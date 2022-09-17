@@ -20,7 +20,7 @@ public class JavaQuestionServiceTest {
         Question expected = new Question(question, answer);
         Assertions.assertEquals(questionService.addQuestion(question, answer), expected);
         Assertions.assertEquals(questionService.getSize(), 1);
-        Assertions.assertEquals(questionService.addQuestion(new Question(question, answer)), expected);
+        questionService.addQuestion(new Question("test", "test"));
         Assertions.assertEquals(questionService.getSize(), 2);
     }
 
